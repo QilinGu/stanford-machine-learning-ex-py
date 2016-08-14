@@ -28,6 +28,8 @@ from matplotlib import cm
 from plotdata import plotData
 from costfunction import costFunction
 from plotdecisionboundary import plotDecisionBoundary
+from sigmoid import sigmoid
+from predict import predict
 
 
 def ex2():
@@ -107,6 +109,31 @@ def ex2():
     print('theta: {}'.format(op_theta))
 
     plotDecisionBoundary(op_theta, X_, y)
+
+    #  ============== Part 4: Predict and Accuracies ==============
+    #  After learning the parameters, you'll like to use it to predict the outcomes
+    #  on unseen data. In this part, you will use the logistic regression model
+    #  to predict the probability that a student with score 45 on exam 1 and
+    #  score 85 on exam 2 will be admitted.
+    #
+    #  Furthermore, you will compute the training and test set accuracies of
+    #  our model.
+    #
+    #  Your task is to complete the code in predict.m
+
+    #  Predict probability for a student with score 45 on exam 1
+    #  and score 85 on exam 2
+
+    prob = sigmoid(np.array([1, 45, 85]).dot(op_theta))
+    print(
+        "For a student with scores 45 and 85, we predict an admission "
+        "probability of {}\n\n'".format(prob))
+
+    # Compute accuracy on our training set
+    p = predict(op_theta, X_)
+
+    print('Train Accuracy: {}\n'.format(
+        np.mean(np.double(p == y.reshape(1, len(y)))) * 100))
 
 if __name__ == '__main__':
     ex2()
