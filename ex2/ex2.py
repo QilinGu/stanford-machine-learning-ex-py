@@ -20,12 +20,14 @@
 
 from io import StringIO
 import numpy as np
+import scipy.optimize as op
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import mpl_toolkits.mplot3d as plt3d
 from matplotlib import cm
 from plotdata import plotData
 from costfunction import costFunction
+from plotdecisionboundary import plotDecisionBoundary
 
 
 def ex2():
@@ -74,7 +76,35 @@ def ex2():
     print('Gradient at initial theta (zeros): \n')
     print('{} \n'.format(grad))
 
+    #  ============= Part 3: Optimizing using fminunc  =============
+    #  In this exercise, you will use a built-in function (fminunc) to find the
+    #  optimal parameters theta.
 
+    #  Run fminunc to obtain the optimal theta
+    #  This function will return theta and the cost
+
+    def minimizedFunc(initial_theta, X, y):
+        cost, grad = costFunction(initial_theta, X_, y)
+        return cost  # must return only 1 arg
+
+    # scipy.optimize.minimize()
+    # If not arg [method] is given, chosen to be one of BFGS, L-BFGS-B, SLSQP,
+    # depending if the problem has constraints or bounds.
+
+    op_result = op.minimize(
+        fun=minimizedFunc,
+        x0=initial_theta,
+        args=(X_, y),
+        method='Nelder-Mead'
+        )
+    print(op_result)
+    op_theta = op_result.x
+    op_cost = op_result.fun
+
+    # Print theta to screen
+    print(
+        'Cost at theta found by scipy.optimize.minimize: {}\n'.format(op_cost))
+    print('theta: {}'.format(op_theta))
 
 if __name__ == '__main__':
     ex2()
