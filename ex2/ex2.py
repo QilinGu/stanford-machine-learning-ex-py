@@ -106,5 +106,7 @@ def ex2():
         'Cost at theta found by scipy.optimize.minimize: {}\n'.format(op_cost))
     print('theta: {}'.format(op_theta))
 
+    plotDecisionBoundary(op_theta, X_, y)
+
 if __name__ == '__main__':
     ex2()

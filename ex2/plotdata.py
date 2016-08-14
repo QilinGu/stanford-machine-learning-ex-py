@@ -4,7 +4,7 @@
 import matplotlib.pyplot as plt
 
 
-def plotData(X, y):
+def plotData(X, y, should_call_show=True):
     """Plots the data points X and y into a new figure
 
     PLOTDATA(x,y) plots the data points with + for the positive examples
@@ -39,6 +39,8 @@ def plotData(X, y):
     plt.xlabel('Exam 1 score')
     plt.ylabel('Exam 2 score')
     plt.legend()
-    plt.show()
+
+    if should_call_show:
+        plt.show()
 
     return
