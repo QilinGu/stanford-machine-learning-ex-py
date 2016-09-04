@@ -22,6 +22,7 @@
 import scipy.io
 import numpy as np
 from displaydata import displayData
+from onevsall import oneVsAll
 
 
 def ex3():
@@ -52,6 +53,20 @@ def ex3():
     sel = X[rand_indices[0:100], :]
 
     displayData(sel)
+
+    # ============ Part 2: Vectorize Logistic Regression ============
+    #  In this part of the exercise, you will reuse your logistic regression
+    #  code from the last exercise. You task here is to make sure that your
+    #  regularized logistic regression implementation is vectorized. After
+    #  that, you will implement one-vs-all classification for the handwritten
+    #  digit dataset.
+
+    print('Training One-vs-All Logistic Regression...')
+
+    LAMBDA = 0.1
+    all_theta = oneVsAll(X, y, NUM_LABELS, LAMBDA)
+
+    print('all_theta {}'.format(all_theta))
 
 
 if __name__ == '__main__':
